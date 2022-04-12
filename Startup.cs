@@ -27,6 +27,12 @@ namespace Weather_Cloud
         public void ConfigureServices(IServiceCollection services)
         {
 
+            services.AddHttpClient("hg", client =>
+            {
+                client.DefaultRequestHeaders.Clear();
+                client.BaseAddress = new Uri(Configuration.GetValue<string>("HG_API:url"));
+            });
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
